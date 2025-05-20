@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Immanuel Kant
+</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    background: #f5f0e6; /* parchment color */
+    color: #4b3621;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #5b4636;
+    margin-top: 0;
+  }
+
+  header {
+    background: #6b4c2b;
+    padding: 1.5rem;
+    text-align: center;
+    color: #f3ead8;
+    box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    background: #7a5a2f;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 0.15);
+  }
+
+  nav button {
+    background: transparent;
+    border: none;
+    color: #f3ead8;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-bottom: 4px solid transparent;
+    transition: border-color 0.3s, background-color 0.3s;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+
+  nav button:hover {
+    background: #a07034;
+  }
+
+  nav button.active {
+    border-color: #f3ead8;
+    background: #a07034;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 2rem auto 4rem auto;
+    padding: 0 1rem;
+  }
+
+  /* Tab contents */
+  .tab-content {
+    display: none;
+    animation: fadeIn 0.6s ease forwards;
+  }
+  .tab-content.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  /* Kartice dijela "Početna" */
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .card {
+    background: #faf5e9;
+    border: 2px solid #d9cbb6;
+    box-shadow: 3px 3px 10px rgb(107 76 43 / 0.45);
+    padding: 1.75rem 2rem;
+    border-radius: 14px;
+    transition: transform 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 6px 6px 18px rgb(107 76 43 / 0.6);
+  }
+
+ .card h3 {
+    margin-bottom: 0.8rem;
+    font-size: 1.8rem;
+    color: #382a12;
+    font-style: italic;
+    text-shadow: 1px 1px 3px rgb(166 134 67 / 0.75);
+    border-bottom: 3px solid #a08042;
+    padding-bottom: 0.3rem;
+    letter-spacing: 1.5px;
+  }
+  .card p {
+    font-size: 1.1rem;
+    color: #5b4636;
+  }
+
+  /* Citati tab */
+  #quotes-section {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  #quote {
+    font-style: italic;
+    font-size: 1.3rem;
+    margin: 2rem auto 3rem auto;
+    max-width: 700px;
+    color: #4b3621;
+    min-height: 80px;
+  }
+
+  #show-quote-btn {
+    background: #7a5a2f;
+    border: none;
+    padding: 0.8rem 2rem;
+    color: #f3ead8;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #show-quote-btn:hover {
+    background: #a07034;
+  }
+
+  /* Njegov život tab */
+.slideshow-container {
+    position: relative;
+    margin-top: 1.5rem;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .slide {
+    display: none;
+    background: linear-gradient(145deg, #efe7d8, #ddd3b9);
+    border: 3px double #b39861;
+    box-shadow: 0 0 15px 3px rgba(180,150,80,0.4);
+    padding: 2rem 2.5rem;
+    border-radius: 20px;
+    font-family: 'Georgia', serif;
+    color: #3b2f16;
+  }
+  .slide.active {
+    display: block;
+    animation: fadeIn 0.6s ease forwards;
+  }
+  .slide h3 {
+    font-size: 2rem;
+    color: #5c4a18;
+    font-style: normal;
+    font-weight: 700;
+    border-bottom: 4px dotted #a37e3a;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.2rem;
+    letter-spacing: 2px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    text-shadow: 0 0 4px rgba(163, 126, 58, 0.7);
+  }
+  .slide p {
+    font-size: 1.15rem;
+    color: #4e3d14;
+    line-height: 1.7;
+    text-align: justify;
+    font-family: 'Merriweather', serif;
+  }
+  /* Slideshow navigation buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    color: #7a5c23;
+    background-color: #ddd3b9;
+    border-radius: 50%;
+    border: 2px solid #a18236;
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 36px;
+    text-align: center;
+    user-select: none;
+    box-shadow: 1px 1px 6px rgba(122, 92, 35, 0.6);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .prev:hover, .next:hover {
+    background-color: #a18236;
+    color: #f3ead8;
+  }
+  .prev {
+    left: -55px;
+  }
+  .next {
+    right: -55px;
+  }
+  /* Zanimljivosti tab */
+  #interesting-facts {
+    margin-top: 1.5rem;
+    list-style: square inside;
+    font-size: 1.1rem;
+    color: #4b3621;
+  }
+  #interesting-facts li {
+    margin-bottom: 0.8rem;
+  }
+  
+
+  /* Zanimljivosti tab */
+  #interesting-facts {
+    margin-top: 1.5rem;
+    list-style: square inside;
+    font-size: 1.1rem;
+    color: #4b3621;
+  }
+
+  #interesting-facts li {
+    margin-bottom: 0.8rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    nav button {
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+    }
+    .cards-container {
+      grid-template-columns: 1fr;
+    }
+    .life-sections {
+      gap: 1.5rem;
+    }
+  }
+
+
+    /* Footer styles */
+  footer {
+    background: #6b4c2b;
+    color: #f3ead8;
+    text-align: center;
+    padding: 1rem;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 -3px 6px rgb(0 0 0 / 0.15);
+  }
+  /* Responsive */
+  @media (max-width: 600px) {
+    nav button {
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+    }
+   .cards-container {
+      grid-template-columns: 1fr;
+    }
+    .life-sections {
+      gap: 1.5rem;
+    }
+  }
+  
+</style>
+</head>
+<body>
+<header>Immanuel Kant
+</header>
+<nav>
+  <button class="tab-link active" data-tab="pocetna">Početna</button>
+  <button class="tab-link" data-tab="citati">Citati</button>
+  <button class="tab-link" data-tab="zivot">Njegov život</button>
+  <button class="tab-link" data-tab="zanimljivosti">Zanimljivosti</button>
+</nav>
+<main>
+  <section id="pocetna" class="tab-content active" aria-label="Početna stranica">
+    <div class="cards-container">
+      <article class="card">
+        <h3>Prolegomena</h3>
+        <p>Glavno djelo koje postavlja temelje njegove filozofije i epistemologije, gdje raspravlja o granicama ljudskog znanja. Takvo polazište omogućuje mu da pokaže što je još potrebno da bi se metafizika mogla uspostaviti kao znanost.</p>
+      </article>
+      <article class="card">
+        <h3>Kritika čistog uma</h3>
+        <p>U "Kritici čistog uma" Kant predstavlja po prvi put svoj transcendentalni idealizam, teoriju koju on sam vidi kao ”kopernikanski obrat".
+        </p>
+
+      </article>
+      <article class="card">
+        <h3>Kritika praktičnog uma</h3>
+        <p>Ovdje ne kritizira praktički um u pravom smislu te riječi, nego nam iznosi svoju teoriju o tome gdje su njegove granice, što on je i što može. Fokusira se na moralnu filozofiju i etiku, dajući temelj za razumijevanje moralnih zakona i slobode volje.</p>
+      </article>
+      <article class="card">
+        <h3>Kritika moći suda</h3>
+        <p>Razmatra estetiku i sud o ukusu, analizirajući kako prosuđujemo ljepotu i umjetnost.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="citati" class="tab-content" aria-label="Citati">
+    <div id="quotes-section">
+      <button id="show-quote-btn" type="button" aria-label="Prikaži slučajni citat">Prikaži citat</button>
+      <p id="quote" aria-live="polite"></p>
+    </div>
+  </section>
+
+
+
+
+
+ <section id="zivot" class="tab-content" aria-label="Njegov život">
+    <div class="slideshow-container" aria-live="polite" aria-atomic="true">
+      <article class="slide active" role="group" aria-roledescription="slide" aria-label="Djetinjstvo">
+        <h3>Djetinjstvo</h3>
+        <p>Immanuel Kanta rođen je 1724. godine u njemačkom gradu Kőnigsbergu. Od ranog djetinjstva pokazivao je intelektualnu nadarenost te se sa 16 godina upisao na fakultet u Königsbergu. Proučavao je filozofiju Gottfrieda Leibniza i Christiana Wolffa pod vodstvom Martina Knutzena, racionalista koji je Kanta upoznao s novom matematičkom fizikom Isaaca Newtona.</p>
+      </article>
+      <article class="slide" role="group" aria-roledescription="slide" aria-label="Srednja dob">
+        <h3>Srednja dob</h3>
+        <p>Kant je bio zainteresiran za fiziku, posebno fiziku zemlje i svemirskih tijela.
+Napisao je nekoliko radova o tome, ali je njegovo zanimanje za metafiziku raslo.
+Htio je proniknuti prirodu ljudskog iskustva: kako ljudi uopće mogu nešto spoznati i na čemu se temelji njihovo znanje.
+Pod snažnim utjecajem Leibnizova i Wolffova filozofskog sistema, Kant je počeo sumnjati u temeljne odgovore prijašnjih filozofa.
+Prekretnicu u njegovu životu je označio škotski filozof David Hume.</p>
+      </article>
+      <article class="slide" role="group" aria-roledescription="slide" aria-label="Stara dob">
+        <h3>Stara dob</h3>
+        <p>U starijoj dobi, Kant je nastavilo s pisanjem i razmišljanjem, usredotočujući se na etiku i estetiku. Umro je 1804. godine, ostavljajući iza sebe trajno filozofsko nasljeđe.Kant je imao velik utjecaj na romantičke i idealističke filozofe devetnaestog stoljeća, njegov je rad bio polazna točka za Hegela.
+        Zajedno je sa Hegelom, Fichteom i Schellingom svrstan među klasične njemačke idealiste, ali je on osobno još svrstan pod transcedentalni idealizam.</p>
+      </article>
+      <button class="prev" aria-label="Prethodni životni period" title="Prethodni">&#10094;</button>
+      <button class="next" aria-label="Sljedeći životni period" title="Sljedeći">&#10095;</button>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+  <section id="zanimljivosti" class="tab-content" aria-label="Zanimljivosti o Kanti">
+    <ul id="interesting-facts">
+       <li>Premda je veliki filozof, nikada nije napustio svoj rodni grad tijekom cijelog života.</li>
+     <li>Nikada se nije ženio. </li> 
+      <li>Njegov rad imao je ogroman utjecaj na moderne filozofske pravce, uključujući i fenomenologiju i egzistencijalizam.</li>
+      <li>Kant je vjerovao da je moralnost utemeljena na univerzalnim zakonima, što je formirao kroz koncept "kategorijskog imperativa".</li>
+      <li>Iako je bio vrlo strog u filozofiji, ljudi su ga opisivali kao skromnog i dobre naravi u svakodnevnom životu.</li>
+    </ul>
+  </section>
+</main>
+
+<footer aria-label="Podnožje stranice">
+  Gimnazija dr. Mate Ujevića, Antea Maršić
+</footer>
+
+<script>
+  // Tab switching logic:
+  const tabs = document.querySelectorAll('nav button.tab-link');
+  const contents = document.querySelectorAll('section.tab-content');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+      // Activate clicked tab and corresponding content
+      tab.classList.add('active');
+      const tabId = tab.getAttribute('data-tab');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+
+  // Random quotes logic
+  const quotes = [
+    "Sreća nije ideal razuma, već ideal mašte.",
+    "Naše cjelokupno znanje počinje s osjetima, zatim prelazi na razumijevanje i završava razumom. Ne postoji ništa iznad razuma.",
+    "Znanost je organizacija znanja. Mudrost je organizacija života.",
+    "Morao sam dokinuti znanje da bih dobio prostor za vjerovanje.",
+    "Djeluj tako da tvoja volja u svako doba može vrijediti kao načelo općeg zakonodavsta.",
+    "Dvije su stvari koje um ispunjavaju sve većim čuđenjem i strahopoštovanjem...zvjezdano nebo nada mnom i moralni zakon u meni.",
+    "Ljudi čiji su postupci motivirani jedino korišću skloni su pretvaranju;u vjeri su licemjeri, u ophođenju laskavci, a u politici prevrtljivci",
+    "Ljepota je ono što nam godi, a da pri tome nemamo nikakv interes.",
+    "Kako se može žaliti da ga gaze ako se načinio crvom.",
+    "Dužnost prema samome sebi se sastoji u tome da čovjek očuva ljudsko dostojanstvo u vlastitoj ličnosti."
+  ];
+
+  const quoteEl = document.getElementById('quote');
+  const btn = document.getElementById('show-quote-btn');
+
+  btn.addEventListener('click', () => {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    quoteEl.textContent = quotes[randomIndex];
+  });
+
+
+
+ // Slideshow logic for Njegov život
+  (function() {
+    const slides = document.querySelectorAll('.slideshow-container .slide');
+    const prevBtn = document.querySelector('.slideshow-container .prev');
+    const nextBtn = document.querySelector('.slideshow-container .next');
+    let currentIndex = 0;
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    }
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      showSlide(currentIndex);
+    });
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    });
+
+    // Optional: keyboard navigation (left/right arrows)
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('zivot').classList.contains('active')) return;
+      if (e.key === 'ArrowLeft') {
+        prevBtn.click();
+      } else if (e.key === 'ArrowRight') {
+        nextBtn.click();
+      }
+    });
+  })();
+
+
+</script>
+</body>
+</html>
+
